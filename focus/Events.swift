@@ -41,7 +41,9 @@ struct Events {
     }
     
     fileprivate mutating func flush() {
-        queue = []
+        if queue.count > 3 {
+            queue = queue.lastNItems(n: 3)
+        }
     }
     
 }
@@ -50,20 +52,39 @@ extension Events : NotificationPresenterDelegate {
     
     mutating func notificationPresenter(_ presenter: NotificationPresenter, didRecieveNotification notification: Notification) {
         queue.append(notification)
+        
+        print(queue)
     }
     
     mutating func notificationPresenterShouldPresentLocalNotification() -> Bool {
         guard queue.count > 2 else { return false }
         
-        let lastIndex = queue.count - 1
-        let lastTwo = [queue[lastIndex], queue[lastIndex - 1]]
-        
-        if lastTwo == Notification.screenOpened {
+        if queue.lastNItems(n: 2) == Notification.screenOpened {
             flush()
             return true
         }
         
         return false
+    }
+    
+    mutating func notificationPresenterShouldClearLocalNotifications() -> Bool {
+        guard queue.count > 3 else { return false }
+        
+        if queue.lastNItems(n: 3) == Notification.screenLocked {
+            flush()
+            return true
+        }
+        
+        return false
+    }
+
+}
+
+fileprivate extension Array {
+    
+    func lastNItems(n: Int) -> [Element] {
+        let firstIndex = self.endIndex - n
+        return Array(self[(firstIndex ..< self.endIndex) as Range<Int>])
     }
     
 }

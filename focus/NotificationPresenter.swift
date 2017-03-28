@@ -11,12 +11,15 @@ import UserNotifications
 
 protocol NotificationPresenterDelegate {
     mutating func notificationPresenterShouldPresentLocalNotification() -> Bool
+    mutating func notificationPresenterShouldClearLocalNotifications() -> Bool
     mutating func notificationPresenter(_ presenter: NotificationPresenter, didRecieveNotification notification: Notification)
 }
 
 final class NotificationPresenter: NSObject {
     
     let identifier = "com.ad.mc.app.focus.phone.down"
+    
+    let delay = 20
     
     var delegate: NotificationPresenterDelegate!
     
@@ -41,7 +44,15 @@ final class NotificationPresenter: NSObject {
         delegate.notificationPresenter(self, didRecieveNotification: notification)
         if (delegate.notificationPresenterShouldPresentLocalNotification()) {
             self.present()
+            print("presenting")
+            return
         }
+        
+        // TODO: find lock pattern
+//        if (delegate.notificationPresenterShouldClearLocalNotifications()) {
+//            center.removeAllPendingNotificationRequests()
+//            print("cancelling")
+//        }
     }
     
     fileprivate func present() {
@@ -53,8 +64,8 @@ final class NotificationPresenter: NSObject {
             content.body = "Remember to focus"
             content.sound = UNNotificationSound.default()
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: self.identifier + String(describing: NSDate()), content: content, trigger: trigger)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+            let request = UNNotificationRequest(identifier: self.identifier, content: content, trigger: trigger)
             self.center.add(request, withCompletionHandler: nil)
         }
     }

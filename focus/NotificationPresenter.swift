@@ -10,9 +10,16 @@ import Foundation
 import UserNotifications
 
 protocol NotificationPresenterDelegate {
+    
+    // Delegate to determine if presenter should fire a local notification
     mutating func notificationPresenterShouldPresentLocalNotification() -> Bool
+    
+    // Delegate to determine if presenter should clear all scheduled notifications
     mutating func notificationPresenterShouldClearLocalNotifications() -> Bool
+    
+    // Delegate to recieve notification from CF Notifications and manage state
     mutating func notificationPresenter(_ presenter: NotificationPresenter, didRecieveNotification notification: Notification)
+    
 }
 
 final class NotificationPresenter: NSObject {
@@ -40,6 +47,11 @@ final class NotificationPresenter: NSObject {
         }
     }
     
+}
+
+// Internal methods
+extension NotificationPresenter {
+
     func enqueue(_ notification: Notification) {
         delegate.notificationPresenter(self, didRecieveNotification: notification)
         if (delegate.notificationPresenterShouldPresentLocalNotification()) {
@@ -55,6 +67,11 @@ final class NotificationPresenter: NSObject {
 //        }
     }
     
+}
+
+// Private methods
+fileprivate extension NotificationPresenter {
+    
     fileprivate func present() {
         center.getNotificationSettings { settings in
             guard settings.authorizationStatus == .authorized else { return }
@@ -69,6 +86,7 @@ final class NotificationPresenter: NSObject {
             self.center.add(request, withCompletionHandler: nil)
         }
     }
+    
 }
 
 extension NotificationPresenter : UNUserNotificationCenterDelegate {

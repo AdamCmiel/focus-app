@@ -29,6 +29,11 @@ struct Events {
         Notification.allCases.forEach { self.registerDarwinEventObserver($0 as CFString, callback: self.darwinEventCallBack) }
     }
     
+}
+
+// Private Methods
+fileprivate extension Events {
+    
     fileprivate func registerDarwinEventObserver(_ event: CFString, callback: @escaping CFNotificationCallback) {
         CFNotificationCenterAddObserver(
             CFNotificationCenterGetDarwinNotifyCenter(),

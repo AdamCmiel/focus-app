@@ -14,6 +14,12 @@
 		775A4A861E8988D10033552B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 775A4A841E8988D10033552B /* LaunchScreen.storyboard */; };
 		775A4A911E8988D10033552B /* focusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775A4A901E8988D10033552B /* focusTests.swift */; };
 		775A4A9C1E8988D20033552B /* focusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775A4A9B1E8988D20033552B /* focusUITests.swift */; };
+		7760F4351E8A31300051F419 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7760F4341E8A31300051F419 /* Events.swift */; };
+		7760F4361E8A31300051F419 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7760F4341E8A31300051F419 /* Events.swift */; };
+		7760F4381E8A335E0051F419 /* NotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7760F4371E8A335E0051F419 /* NotificationPresenter.swift */; };
+		7760F4391E8A335E0051F419 /* NotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7760F4371E8A335E0051F419 /* NotificationPresenter.swift */; };
+		7760F43B1E8A3BB30051F419 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7760F43A1E8A3BB30051F419 /* Notification.swift */; };
+		7760F43C1E8A3BB30051F419 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7760F43A1E8A3BB30051F419 /* Notification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,9 @@
 		775A4A971E8988D20033552B /* focusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = focusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		775A4A9B1E8988D20033552B /* focusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = focusUITests.swift; sourceTree = "<group>"; };
 		775A4A9D1E8988D20033552B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7760F4341E8A31300051F419 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		7760F4371E8A335E0051F419 /* NotificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPresenter.swift; sourceTree = "<group>"; };
+		7760F43A1E8A3BB30051F419 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				775A4A7B1E8988D10033552B /* AppDelegate.swift */,
+				7760F4371E8A335E0051F419 /* NotificationPresenter.swift */,
+				7760F4341E8A31300051F419 /* Events.swift */,
+				7760F43A1E8A3BB30051F419 /* Notification.swift */,
 				775A4A7D1E8988D10033552B /* ViewController.swift */,
 				775A4A7F1E8988D10033552B /* Main.storyboard */,
 				775A4A821E8988D10033552B /* Assets.xcassets */,
@@ -193,6 +205,7 @@
 				TargetAttributes = {
 					775A4A771E8988D10033552B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 45JU49X5G4;
 						ProvisioningStyle = Automatic;
 					};
 					775A4A8B1E8988D10033552B = {
@@ -259,6 +272,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7760F4351E8A31300051F419 /* Events.swift in Sources */,
+				7760F43B1E8A3BB30051F419 /* Notification.swift in Sources */,
+				7760F4381E8A335E0051F419 /* NotificationPresenter.swift in Sources */,
 				775A4A7E1E8988D10033552B /* ViewController.swift in Sources */,
 				775A4A7C1E8988D10033552B /* AppDelegate.swift in Sources */,
 			);
@@ -268,7 +284,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7760F43C1E8A3BB30051F419 /* Notification.swift in Sources */,
+				7760F4361E8A31300051F419 /* Events.swift in Sources */,
 				775A4A911E8988D10033552B /* focusTests.swift in Sources */,
+				7760F4391E8A335E0051F419 /* NotificationPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 45JU49X5G4;
 				INFOPLIST_FILE = focus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ad.mc.app.focus;
@@ -424,6 +444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 45JU49X5G4;
 				INFOPLIST_FILE = focus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ad.mc.app.focus;
@@ -505,6 +526,7 @@
 				775A4AA21E8988D20033552B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		775A4AA31E8988D20033552B /* Build configuration list for PBXNativeTarget "focusTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +535,7 @@
 				775A4AA51E8988D20033552B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		775A4AA61E8988D20033552B /* Build configuration list for PBXNativeTarget "focusUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +544,7 @@
 				775A4AA81E8988D20033552B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

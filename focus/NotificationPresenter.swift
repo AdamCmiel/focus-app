@@ -22,6 +22,9 @@ protocol NotificationPresenterDelegate {
     
 }
 
+// We need a reference type here that conforms to AnyObject
+// to make a C - pointer to the presenter to hand off to CF Notifications
+// All actual event parsing will happen in the delegate
 final class NotificationPresenter: NSObject {
     
     let identifier = "com.ad.mc.app.focus.phone.down"
@@ -75,16 +78,21 @@ fileprivate extension NotificationPresenter {
     fileprivate func present() {
         center.getNotificationSettings { settings in
             guard settings.authorizationStatus == .authorized else { return }
-            
-            let content = UNMutableNotificationContent()
-            content.title = "Put down your phone"
-            content.body = "Remember to focus"
-            content.sound = UNNotificationSound.default()
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
-            let request = UNNotificationRequest(identifier: self.identifier, content: content, trigger: trigger)
-            self.center.add(request, withCompletionHandler: nil)
+            self.request(delay: 1.0)
+            self.request(delay: 30.0)
         }
+    }
+    
+    fileprivate func request(delay: Double) {
+        let content = UNMutableNotificationContent()
+        content.title = "Put down your phone"
+        content.body = "Remember to focus"
+        content.sound = UNNotificationSound.default()
+        
+        // Trigger in 20s
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
+        let request = UNNotificationRequest(identifier: self.identifier, content: content, trigger: trigger)
+        self.center.add(request, withCompletionHandler: nil)
     }
     
 }

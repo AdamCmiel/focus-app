@@ -1,11 +1,3 @@
-//
-//  Notification.swift
-//  focus
-//
-//  Created by Adam Cmiel on 3/27/17.
-//  Copyright © 2017 Adam Cmiel. All rights reserved.
-//
-
 enum Notification : String {
     
     // Fired when the screen is darkened
@@ -28,14 +20,15 @@ extension Notification {
         Notification.lockstate
     ].map { $0.rawValue }
     
-    // In the order of events fired
+    /// In the order of events fired
     static let screenLocked: [Notification] = [.hasBlankedScreen, .lockstate, .lockcomplete]
     
-    // In the order of events fired
+    /// In the order of events fired
     static let screenOpened: [Notification] = [.lockstate, .hasBlankedScreen]
     
 }
 
+/// Write out only one letter for each event in debug
 extension Notification : CustomDebugStringConvertible {
     
     var debugDescription: String {

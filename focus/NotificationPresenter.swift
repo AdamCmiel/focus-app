@@ -46,7 +46,7 @@ final class NotificationPresenter: NSObject {
     
 }
 
-/// Internal methods
+// MARK: Internal Methods
 extension NotificationPresenter {
 
     func enqueue(_ notification: Notification) {
@@ -66,7 +66,7 @@ extension NotificationPresenter {
     
 }
 
-/// Private methods
+// MARK: Private methods
 fileprivate extension NotificationPresenter {
     
     fileprivate func present() {
@@ -90,6 +90,7 @@ fileprivate extension NotificationPresenter {
     
 }
 
+// MARK: UNUserNotificationCenterDelegate
 extension NotificationPresenter : UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

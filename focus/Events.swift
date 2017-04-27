@@ -23,7 +23,7 @@ struct Events {
     
 }
 
-// Private Methods
+// MARK: Private Methods
 fileprivate extension Events {
     
     fileprivate func registerDarwinEventObserver(_ event: CFString, callback: @escaping CFNotificationCallback) {
@@ -49,30 +49,25 @@ extension Events : NotificationPresenterDelegate {
     
     mutating func notificationPresenter(_ presenter: NotificationPresenter, didRecieveNotification notification: Notification) {
         queue.append(notification)
-        
         print(queue)
     }
     
     mutating func shouldPresentLocalNotification() -> Bool {
-        guard queue.count > 2 else { return false }
+        guard last(n: 2, itemsMatchPattern: Notification.screenOpened) else { return false }
         
-        if queue.lastNItems(n: 2) == Notification.screenOpened {
-            flush()
-            return true
-        }
-        
-        return false
+        flush()
+        return true
     }
     
     mutating func shouldClearLocalNotifications() -> Bool {
-        guard queue.count > 3 else { return false }
+        guard last(n: 3, itemsMatchPattern: Notification.screenLocked) else { return false }
         
-        if queue.lastNItems(n: 3) == Notification.screenLocked {
-            flush()
-            return true
-        }
-        
-        return false
+        flush()
+        return true
+    }
+    
+    private func last(n: Int, itemsMatchPattern pattern: [Notification]) -> Bool {
+        return queue.count > n && queue.lastNItems(n: n) == pattern
     }
 
 }

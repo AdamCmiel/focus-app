@@ -61,7 +61,7 @@ extension Events : NotificationPresenterDelegate {
         print(queue)
     }
     
-    mutating func notificationPresenterShouldPresentLocalNotification() -> Bool {
+    mutating func shouldPresentLocalNotification() -> Bool {
         guard queue.count > 2 else { return false }
         
         if queue.lastNItems(n: 2) == Notification.screenOpened {
@@ -72,7 +72,7 @@ extension Events : NotificationPresenterDelegate {
         return false
     }
     
-    mutating func notificationPresenterShouldClearLocalNotifications() -> Bool {
+    mutating func shouldClearLocalNotifications() -> Bool {
         guard queue.count > 3 else { return false }
         
         if queue.lastNItems(n: 3) == Notification.screenLocked {

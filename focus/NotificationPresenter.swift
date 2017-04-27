@@ -12,10 +12,10 @@ import UserNotifications
 protocol NotificationPresenterDelegate {
     
     // Delegate to determine if presenter should fire a local notification
-    mutating func notificationPresenterShouldPresentLocalNotification() -> Bool
+    mutating func shouldPresentLocalNotification() -> Bool
     
     // Delegate to determine if presenter should clear all scheduled notifications
-    mutating func notificationPresenterShouldClearLocalNotifications() -> Bool
+    mutating func shouldClearLocalNotifications() -> Bool
     
     // Delegate to recieve notification from CF Notifications and manage state
     mutating func notificationPresenter(_ presenter: NotificationPresenter, didRecieveNotification notification: Notification)
@@ -57,14 +57,14 @@ extension NotificationPresenter {
 
     func enqueue(_ notification: Notification) {
         delegate.notificationPresenter(self, didRecieveNotification: notification)
-        if (delegate.notificationPresenterShouldPresentLocalNotification()) {
+        if (delegate.shouldPresentLocalNotification()) {
             self.present()
             print("presenting")
             return
         }
         
         // TODO: find lock pattern
-//        if (delegate.notificationPresenterShouldClearLocalNotifications()) {
+//        if (delegate.shouldClearLocalNotifications()) {
 //            center.removeAllPendingNotificationRequests()
 //            print("cancelling")
 //        }

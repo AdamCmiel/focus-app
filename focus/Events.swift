@@ -1,11 +1,3 @@
-//
-//  Events.swift
-//  focus
-//
-//  Created by Adam Cmiel on 3/27/17.
-//  Copyright © 2017 Adam Cmiel. All rights reserved.
-//
-
 import CoreFoundation
 
 struct Events {

@@ -1,30 +1,23 @@
-//
-//  NotificationPresenter.swift
-//  focus
-//
-//  Created by Adam Cmiel on 3/27/17.
-//  Copyright © 2017 Adam Cmiel. All rights reserved.
-//
-
 import Foundation
 import UserNotifications
 
+/// Delegate determines conditions for triggering user notifications
 protocol NotificationPresenterDelegate {
     
-    // Delegate to determine if presenter should fire a local notification
+    /// Determine if presenter should fire a local notification
     mutating func shouldPresentLocalNotification() -> Bool
     
-    // Delegate to determine if presenter should clear all scheduled notifications
+    /// Determine if presenter should clear all scheduled notifications
     mutating func shouldClearLocalNotifications() -> Bool
     
-    // Delegate to recieve notification from CF Notifications and manage state
+    /// Recieve notification from CF Notifications and manage state
     mutating func notificationPresenter(_ presenter: NotificationPresenter, didRecieveNotification notification: Notification)
     
 }
 
-// We need a reference type here that conforms to AnyObject
-// to make a C - pointer to the presenter to hand off to CF Notifications
-// All actual event parsing will happen in the delegate
+/// We need a reference type here that conforms to AnyObject
+/// to make a C - pointer to the presenter to hand off to CF Notifications
+/// All actual event parsing will happen in the delegate
 final class NotificationPresenter: NSObject {
     
     let identifier = "com.ad.mc.app.focus.phone.down"
@@ -40,8 +33,9 @@ final class NotificationPresenter: NSObject {
     fileprivate var center: UNUserNotificationCenter!
     
     override init() {
-        center = UNUserNotificationCenter.current()
         super.init()
+        center = UNUserNotificationCenter.current()
+    
         center.delegate = self
         center.requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
             if !granted {
@@ -52,7 +46,7 @@ final class NotificationPresenter: NSObject {
     
 }
 
-// Internal methods
+/// Internal methods
 extension NotificationPresenter {
 
     func enqueue(_ notification: Notification) {
@@ -72,7 +66,7 @@ extension NotificationPresenter {
     
 }
 
-// Private methods
+/// Private methods
 fileprivate extension NotificationPresenter {
     
     fileprivate func present() {
@@ -89,7 +83,6 @@ fileprivate extension NotificationPresenter {
         content.body = "Remember to focus"
         content.sound = UNNotificationSound.default()
         
-        // Trigger in 20s
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let request = UNNotificationRequest(identifier: self.identifier, content: content, trigger: trigger)
         self.center.add(request, withCompletionHandler: nil)
